@@ -9,6 +9,7 @@ import { checkMediaSchema, mediaValidationResult } from "./validation.js";
 import { mediaJSONPath, dataFolderPath } from "../../lib/fs-tools.js";
 import { stringify } from "querystring";
 import axios from "axios";
+import "dotenv/config";
 
 const mediaRouter = express.Router();
 
