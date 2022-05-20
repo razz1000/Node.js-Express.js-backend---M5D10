@@ -36,7 +36,7 @@ const corsOptions = {
 };
 
 server.use(express.static(publicFolderPath));
-server.use(cors(corsOptions));
+server.use(cors(/* corsOptions */));
 server.use(express.json());
 
 //-----ENDPOINTS--------

@@ -2,22 +2,39 @@ import { checkSchema, validationResult } from "express-validator";
 import createError from "http-errors";
 
 const mediaSchema = {
-  image: {
-    in: ["body"],
-    isString: {
-      errorMessage: "Image is required as a string in the Body",
-    },
-  },
-  title: {
+  Title: {
+    optional: true,
     in: ["body"],
     isString: {
       errorMessage: "Title is required as a string in the Body",
     },
   },
-  description: {
+  Year: {
+    optional: true,
+    in: ["body"],
+    isInt: {
+      errorMessage: "Year is required as an integer in the Body",
+    },
+  },
+  imdbID: {
+    optional: true,
     in: ["body"],
     isString: {
-      errorMessage: "Description is required as a string in the Body",
+      errorMessage: "imdbID is required as a string in the Body",
+    },
+    Type: {
+      optional: true,
+      in: ["body"],
+      isString: {
+        errorMessage: "Type is required in the Body",
+      },
+      Poster: {
+        optional: true,
+        in: ["body"],
+        isString: {
+          errorMessage: "Poster is required in the body",
+        },
+      },
     },
   },
 };

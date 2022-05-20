@@ -4,9 +4,12 @@ import { dirname, join } from "path";
 
 const { readJSON, writeFile, writeJSON, createReadStream } = fs;
 
-const dataFolderPath = join(dirname(fileURLToPath(import.meta.url)), "../data");
+export const dataFolderPath = join(
+  dirname(fileURLToPath(import.meta.url)),
+  "../data"
+);
 
-const mediaJSONPath = join(dataFolderPath, "media.json");
+export const mediaJSONPath = join(dataFolderPath, "media.json");
 
 const mediaPublicFolderPath = join(process.cwd(), "./public/img/media");
 
