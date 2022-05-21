@@ -50,33 +50,26 @@ mediaRouter.get("/", async (req, res, next) => {
           req.query.Title +
           "&apikey=" +
           process.env.OMDB_KEY;
-        const response = await axios.get(url);
-        console.log(response.data.Search);
-        /* let Search = response.date; */
-        const Search = response.data.Search[0];
-
-        /*         const OMDBMediaPosts = {
-          Title: Search.Title,
-          Year: Search.Year,
-          imdbID: Search.imdbID,
-          Type: Search.Type,
-          Poster: Search.Poster,
-        };
- */
-        const OMDBMediaPosts = {
-          ...req.body,
-          ...response.data.Search[0],
-          reviews: [],
-          createdAt: new Date(),
-        };
-        let media = getMedia();
-        media.push(OMDBMediaPosts);
-        await writeMedia(OMDBMediaPosts);
-
-        console.log("OMDB MEDIA POSTS:", OMDBMediaPosts);
-        /*  media.push(response.data); */
-        /* await JSON.stringify(writeFile(media)); */
-        res.send(response.data);
+        const { data } = await axios.get(url);
+        let tempArray = [];
+        data.Search.map((m) => {
+          const OMDBMediaPosts = {
+            Title: m.Title,
+            Year: m.Year,
+            Type: m.Type,
+            Poster: m.Poster,
+            imdbID: m.imdbID,
+            reviews: [],
+            createdAt: new Date(),
+          };
+          tempArray.push(OMDBMediaPosts);
+        });
+        console.log("THESE ARE THE TEMP ARRAY", tempArray);
+        let media = await getMedia();
+        let newArray3 = media.concat(tempArray);
+        console.log("This is the Array3:", newArray3);
+        await writeMedia(newArray3);
+        res.send(newArray3);
       }
     } else {
       res.send(media);
