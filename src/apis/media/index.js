@@ -2,7 +2,6 @@ import express from "express";
 import fs, { writeFile } from "fs";
 import { pipeline } from "stream";
 import uniqid from "uniqid";
-
 import { getMedia, writeMedia } from "../../lib/fs-tools.js";
 import { getPDFReadableStream } from "../../lib/pdf-tools.js";
 import { checkMediaSchema, mediaValidationResult } from "./validation.js";
@@ -14,7 +13,7 @@ import "dotenv/config";
 const mediaRouter = express.Router();
 
 mediaRouter.post(
-  "",
+  "/",
   checkMediaSchema,
   mediaValidationResult,
   async (req, res, next) => {
@@ -38,8 +37,6 @@ mediaRouter.post(
 mediaRouter.get("/", async (req, res, next) => {
   try {
     const media = await getMedia();
-    /* console.log("media: ", media); */
-
     if (req.query && req.query.Title) {
       const filteredMedia = media.filter(
         (media) => media.Title === req.query.Title
@@ -54,15 +51,30 @@ mediaRouter.get("/", async (req, res, next) => {
           "&apikey=" +
           process.env.OMDB_KEY;
         const response = await axios.get(url);
-        console.log(response.data);
+        console.log(response.data.Search);
+        /* let Search = response.date; */
+        const Search = response.data.Search[0];
 
-        const OMDBMediaPost = {
-          ...response.data,
+        /*         const OMDBMediaPosts = {
+          Title: Search.Title,
+          Year: Search.Year,
+          imdbID: Search.imdbID,
+          Type: Search.Type,
+          Poster: Search.Poster,
+        };
+ */
+        const OMDBMediaPosts = {
+          ...req.body,
+          ...response.data.Search[0],
           reviews: [],
           createdAt: new Date(),
         };
-        console.log("OMDB MEDIA POSTS:", OMDBMediaPost);
-        media.push(OMDBMediaPost);
+        let media = getMedia();
+        media.push(OMDBMediaPosts);
+        await writeMedia(OMDBMediaPosts);
+
+        console.log("OMDB MEDIA POSTS:", OMDBMediaPosts);
+        /*  media.push(response.data); */
         /* await JSON.stringify(writeFile(media)); */
         res.send(response.data);
       }
