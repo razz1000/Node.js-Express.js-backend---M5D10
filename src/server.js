@@ -17,7 +17,11 @@ export const publicFolderPath = join(process.cwd(), "./public");
 const server = express();
 const port = process.env.PORT || 5001;
 
-const whitelist = [process.env.FE_DEV_URL, process.env.FE_PROD_URL];
+const whitelist = [
+  process.env.FE_DEV_URL,
+  process.env.FE_PROD_URL,
+  process.env.FE_PROD_URL2,
+];
 
 const corsOptions = {
   origin: (origin, next) => {
