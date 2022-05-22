@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon -e js ./src/server.js",
-    "start": "./src/server.js"
+    "start": "node ./src/server.js"
   },
   "repository": {
     "type": "git",
