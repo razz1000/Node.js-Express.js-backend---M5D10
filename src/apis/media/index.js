@@ -79,16 +79,6 @@ mediaRouter.get("/", async (req, res, next) => {
   }
 });
 
-// --------------NORMAL GET -----
-/* mediaRouter.get("/", async (req, res, next) => {
-  try {
-    const media = await getMedia();
-    console.log("Current Media Posts:", media);
-    res.send(media);
-  } catch (error) {
-    next(error);
-  }
-}); */
 
 mediaRouter.get("/:imdbID", async (req, res, next) => {
   try {
