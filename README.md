@@ -1,4 +1,3 @@
-
 <h1>Backend build in Node / Express</h1>
 <p>This was a backend I built containing a list of movies. You can see the backend here on Heroku: https://m5d10-benchmark.herokuapp.com/media .</p>
 <p>The backend was built using Node and Express.js. Router wise it includes a GET, POST, GET:byId, PUT and DELETE request. As well as a "review" section that is nested inside the "media" folder. Again see what I mean here: https://m5d10-benchmark.herokuapp.com/media </p>
@@ -11,4 +10,5 @@
 <p>- GIT</p>
 <p>- Heroku</p>
 
-
+<h2>Screenshots</h2>
+<img src="./Screenshot1.png">
